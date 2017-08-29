@@ -1,0 +1,7 @@
+@import '__config';
+@import '_fonts';
+@import '../static/css/style.css';
+
+body {
+  background: $colour_background url('#{$path_img_prefix}/apple-touch-icon.png') 50% 50% no-repeat;
+}
