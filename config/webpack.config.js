@@ -1,11 +1,17 @@
 // Dependencies
-let CopyWebpackPlugin = require('copy-webpack-plugin');
 const PATH = require('path');
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const NameAllModulesPlugin = require('name-all-modules-plugin');
 
 // Root folders
 const CONFIG_DIR = PATH.resolve(__dirname, '.'),
-      INPUT_DIR  = PATH.resolve(__dirname, '../src'),
-      OUTPUT_DIR = PATH.resolve(__dirname, '../dist');
+      ROOT_DIR   = PATH.resolve(__dirname, './..'),
+      INPUT_DIR  = PATH.resolve(__dirname, './../src'),
+      OUTPUT_DIR = PATH.resolve(__dirname, './../dist');
 
 // If we want to process files during bundling
 const DATA_DIR   = INPUT_DIR + '/data',
@@ -20,12 +26,16 @@ const CSS_DIR    = STATIC_DIR + '/css',
 
 // Start config
 module.exports = {
-  entry: INPUT_DIR + '/index.js',
+  entry: {
+    app: INPUT_DIR + '/index.js',
+    print: INPUT_DIR + '/print.js'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].[chunkhash].js',
     path: OUTPUT_DIR
   },
   plugins: [
+
     // Copies files during builds
     // See: https://github.com/kevlened/copy-webpack-plugin
     new CopyWebpackPlugin(
@@ -36,6 +46,10 @@ module.exports = {
         },
         {
           from: STATIC_DIR + '/favicon.ico',
+          to: OUTPUT_DIR
+        },
+        {
+          from: STATIC_DIR + '/index.html',
           to: OUTPUT_DIR
         }
         // // {output}/file.txt
@@ -91,7 +105,63 @@ module.exports = {
         // // to `true` copies all files.
         // copyUnmodified: true
       }
-    )
+    ),
+
+    // Creates and manipulates HTML
+    // See: https://github.com/jantimon/html-webpack-plugin
+    new HtmlWebpackPlugin(
+      {
+        template: STATIC_DIR + '/index.html'
+      }
+    ),
+
+    // Cleans out the build directories
+    // See: https://github.com/johnagan/clean-webpack-plugin
+    new CleanWebpackPlugin(
+      [
+        OUTPUT_DIR
+      ],
+      {
+        root: ROOT_DIR
+      }
+    ),
+
+    // Create a JSON manifest of all assets managed by webpack
+    // See: https://github.com/danethurber/webpack-manifest-plugin
+    new ManifestPlugin(
+      {
+        fileName: 'webpack-manifest.json'
+      }
+    ),
+
+    // Output the name of modules during HMR/Dev
+    // See: https://webpack.js.org/plugins/named-modules-plugin/
+    new webpack.NamedModulesPlugin(),
+
+    // Gives each chunk a name. Useful for long-time caching of modules
+    new webpack.NamedChunksPlugin(
+      (chunk) => {
+        if (chunk.name) {
+            return chunk.name;
+        }
+        return chunk.modules
+          .map(m => PATH.relative(m.context, m.request))
+          .join('_');
+      }
+    ),
+
+    // Separate out common chunks from the JS Bundles
+    // See: https://webpack.js.org/plugins/commons-chunk-plugin/
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks: Infinity
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'runtime'
+    }),
+
+    // Gives each module a name for good caching
+    new NameAllModulesPlugin()
 
   ],
   module: {
