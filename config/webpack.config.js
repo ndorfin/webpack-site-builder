@@ -28,7 +28,10 @@ const CSS_DIR    = STATIC_DIR + '/css',
 module.exports = {
   entry: {
     app: INPUT_DIR + '/index.js',
-    print: INPUT_DIR + '/print.js'
+    print: INPUT_DIR + '/print.js',
+    vendor: [
+      'lodash'
+    ]
   },
   output: {
     filename: '[name].[chunkhash].js',
