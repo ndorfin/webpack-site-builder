@@ -33,6 +33,7 @@
     "csv-loader": "^2.1.1",
     "eslint": "^4.6.0",
     "eslint-config-recommended": "^1.5.0",
+    "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",
     "name-all-modules-plugin": "^1.0.1",
