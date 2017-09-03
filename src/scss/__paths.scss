@@ -1,0 +1,51 @@
+$path_base: '../static/';
+
+$url-rewrites: (
+  'img': 'Image',
+  'fnt': 'Font'
+);
+
+@function getUrlPathPrefix($type) {
+  @return '#{$path_base}#{$type}';
+}
+
+@function img-url($url:'') {
+  @return return-url($url, 'img');
+}
+
+@function fnt-url($url:'') {
+  @return return-url($url, 'font');
+}
+
+@function return-url($url: '', $typeParam: '') {
+  $path_prefix: '';
+  @if ($url == '') {
+    @error "No URL specified for this #{map-get($url-rewrites, $typeParam)}";
+  }
+  @each $type, $title in $url-rewrites {
+    @if ($typeParam == $type) {
+      $path_prefix: getUrlPathPrefix($type);
+    }
+  }
+  @return url(#{$path_prefix}/#{$url});
+}
+
+// @each $type, $title in $url-rewrites {
+//   @function #{$type}-url($url:'') {
+//     @return return-url($url, $type);
+//   }
+// }
+
+// @function return-url($url: '', $type: '') {
+//   $path_prefix: '';
+//   @if ($url == '') {
+//     @error "No URL specified for this #{$type}";
+//   }
+//   @if ($type == 'img') {
+//     $path_prefix: $path_img_prefix;
+//   }
+//   @if ($type == 'font') {
+//     $path_prefix: $path_font_prefix;
+//   }
+//   @return url(#{$path_prefix}/#{$url});
+// }

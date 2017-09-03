@@ -10,4 +10,10 @@ body {
   background-image: img-url('apple-touch-icon.png');
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  font-family: 'OpenSans', 'Arial', 'Helvetica', sans-sierf;
 }
+button {font-family: inherit;}
