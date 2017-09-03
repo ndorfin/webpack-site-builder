@@ -7,10 +7,7 @@ const PLUGINS = require('./constants_plugins');
 // Start config
 let generalConfig = {
   entry: {
-    app: PATH.INPUT_DIR + '/index.js',
-    vendor: [
-      'lodash'
-    ]
+    app: PATH.INPUT_DIR + '/index.js'
   },
   output: {
     filename: CONFIG_SETTINGS.webpack.outputPattern,

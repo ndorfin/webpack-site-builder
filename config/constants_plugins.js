@@ -1,13 +1,22 @@
+// Dependencies
 const getPath              = require('path');
 const webpack              = require('webpack');
+
+// Shared plugins
 const CopyWebpackPlugin    = require('copy-webpack-plugin');
 const HtmlWebpackPlugin    = require('html-webpack-plugin');
-const CleanWebpackPlugin   = require('clean-webpack-plugin');
-const ManifestPlugin       = require('webpack-manifest-plugin');
-const NameAllModulesPlugin = require('name-all-modules-plugin');
 
+// Development plugins
+const ManifestPlugin       = require('webpack-manifest-plugin');
+
+// Production plugins
+const CleanWebpackPlugin   = require('clean-webpack-plugin');
+const NameAllModulesPlugin = require('name-all-modules-plugin');
+const UglifyJSPlugin       = require('uglifyjs-webpack-plugin');
+
+// Set constants
 const ENVIRONMENT = require('./constants_environment');
-const PATH = require('./constants_path');
+const PATH        = require('./constants_path');
 
 const sharedPlugins = [
 
@@ -36,22 +45,23 @@ const sharedPlugins = [
     {
       template: PATH.STATIC_DIR + '/index.html'
     }
-  ),
-
-  // Cleans out the build directories
-  // See: https://github.com/johnagan/clean-webpack-plugin
-  new CleanWebpackPlugin(
-    [
-      PATH.OUTPUT_DIR
-    ],
-    {
-      root: PATH.ROOT_DIR
-    }
   )
+
 ];
 
 const ENVIRONMENT_PLUGINS = {
   'production': [
+
+    // Cleans out the build directories
+    // See: https://github.com/johnagan/clean-webpack-plugin
+    new CleanWebpackPlugin(
+      [
+        PATH.OUTPUT_DIR
+      ],
+      {
+        root: PATH.ROOT_DIR
+      }
+    ),
 
     // Output the name of modules during HMR/Dev
     // See: https://webpack.js.org/plugins/named-modules-plugin/
@@ -80,7 +90,10 @@ const ENVIRONMENT_PLUGINS = {
     }),
 
     // Gives each module a name for good caching
-    new NameAllModulesPlugin()
+    new NameAllModulesPlugin(),
+
+    // Compress output
+    new UglifyJSPlugin()
 
   ],
   'development': [

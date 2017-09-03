@@ -1,17 +1,21 @@
 import 'SCSS/test.scss';
 import printMe from './print';
+import { square } from './math';
 
 function component() {
-  let element = document.createElement('div');
+  let elem = document.createElement('div');
   let btn = document.createElement('button');
 
-  element.innerHTML = 'Hello webpack';
-  element.classList.add('hello');
+  elem.innerHTML = 'Hello webpack';
+  elem.classList.add('hello');
 
   btn.innerHTML = 'Click me and check the console!';
   btn.onclick = printMe;
-  element.appendChild(btn);
-  return element;
+  elem.appendChild(btn);
+
+  console.log('69 squared: ' + square(69));
+
+  return elem;
 }
 
 document.body.appendChild(component());

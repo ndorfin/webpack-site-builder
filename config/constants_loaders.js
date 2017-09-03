@@ -2,6 +2,13 @@ const ENVIRONMENT = require('./constants_environment');
 
 const LOADERS = [
   {
+    test: /\.js$/,
+    loader: 'babel-loader',
+    query: {
+      presets: ['es2015']
+    }
+  },
+  {
     test: /\.css$/,
     use: [
       { // Creates style nodes from JS strings
