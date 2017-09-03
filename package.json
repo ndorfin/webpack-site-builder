@@ -10,14 +10,17 @@
     ]
   },
   "scripts": {
-    "server": "webpack-dev-server --open --config ./config/webpack.config.js",
-    "start": "npm run watch",
-    "watch": "npm run server -- --watch",
-    "build": "parallel-webpack --config ./config/webpack.config.js",
+    "browse:dist": "open http://localhost:8000",
+    "build": "NODE_ENV=production parallel-webpack --config ./config/webpack.config.js",
+    "lint": "npm run lint:js & npm run lint:scss",
     "lint:js": "eslint src/*.js",
     "lint:scss": "stylelint ./src/scss/**/*.scss --config ./config/stylelintrc.json --scss",
     "lint:css": "stylelint ./src/css/**/*.css --config ./config/stylelintrc.json",
-    "lint": "npm run lint:js & npm run lint:scss"
+    "preview:prod": "npm run build && npm run server:dist",
+    "server": "webpack-dev-server --open --config ./config/webpack.config.js",
+    "server:dist": "pushd ./dist; python -m SimpleHTTPServer; popd",
+    "start": "npm run watch",
+    "watch": "npm run server -- --watch"
   },
   "license": "ISC",
   "devDependencies": {
