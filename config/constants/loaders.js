@@ -1,20 +1,42 @@
 // Dependencies
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ENVIRONMENT       = require('./environments');
+const PATHS             = require('./paths');
 
 const sharedLoaders = [
   {
-    test: /\.(png|svg|jpg|jpeg|gif|txt|ico)$/,
-    use: [
-      'file-loader'
-    ]
+    test: /\.(png|svg|ico|txt)$/,
+    use: {
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]',
+        include: [
+          PATHS.STATIC_DIR
+        ]
+      }
+    }
+  },
+  {
+    test: /\.(png|svg|jpg|jpeg|gif)$/,
+    use: {
+      loader: 'file-loader',
+      options: {
+        name: 'img/[name]-[hash].[ext]',
+        include: [
+          PATHS.IMAGE_DIR
+        ]
+      }
+    }
   },
   {
     test: /\.(woff|woff2)$/,
     use: {
       loader: 'file-loader',
       options: {
-        name: 'fonts/[name]-[hash].[ext]'
+        name: 'fonts/[name]-[hash].[ext]',
+        include: [
+          PATHS.FONTS_DIR
+        ]
       }
     }
   },

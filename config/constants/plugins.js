@@ -3,7 +3,7 @@ const getPath              = require('path');
 const webpack              = require('webpack');
 
 // Shared plugins
-const CopyWebpackPlugin    = require('copy-webpack-plugin');
+// const CopyWebpackPlugin    = require('copy-webpack-plugin');
 const HtmlWebpackPlugin    = require('html-webpack-plugin');
 const ExtractTextPlugin    = require('extract-text-webpack-plugin');
 
@@ -23,16 +23,20 @@ const sharedPlugins = [
 
   // Copies files during builds
   // See: https://github.com/kevlened/copy-webpack-plugin
-  new CopyWebpackPlugin([
-    {
-      from: PATH.STATIC_DIR + '/robots.txt',
-      to: PATH.OUTPUT_DIR
-    },
-    {
-      from: PATH.STATIC_DIR + '/favicon.ico',
-      to: PATH.OUTPUT_DIR
-    }
-  ]),
+  // new CopyWebpackPlugin([
+  //   {
+  //     from: PATH.STATIC_DIR + '/robots.txt',
+  //     to: PATH.OUTPUT_DIR
+  //   },
+  //   {
+  //     from: PATH.STATIC_DIR + '/human.txt',
+  //     to: PATH.OUTPUT_DIR
+  //   },
+  //   {
+  //     from: PATH.STATIC_DIR + '/favicon.ico',
+  //     to: PATH.OUTPUT_DIR
+  //   }
+  // ]),
 
   // Creates and manipulates HTML
   // See: https://github.com/jantimon/html-webpack-plugin
