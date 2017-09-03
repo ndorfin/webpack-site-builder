@@ -1,10 +1,12 @@
+// Dependencies
 const getPath = require('path');
 
+// Set up our base object
 let PATH = {
-  CONFIG_DIR : getPath.resolve(__dirname, '.'),
-  ROOT_DIR   : getPath.resolve(__dirname, './..'),
-  INPUT_DIR  : getPath.resolve(__dirname, './../src'),
-  OUTPUT_DIR : getPath.resolve(__dirname, './../dist')
+  CONFIG_DIR : getPath.resolve(__dirname, './..'),
+  ROOT_DIR   : getPath.resolve(__dirname, './../..'),
+  INPUT_DIR  : getPath.resolve(__dirname, './../../src'),
+  OUTPUT_DIR : getPath.resolve(__dirname, './../../dist')
 };
 
 // If we want to process files during bundling

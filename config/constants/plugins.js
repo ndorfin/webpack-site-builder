@@ -15,8 +15,8 @@ const NameAllModulesPlugin = require('name-all-modules-plugin');
 const UglifyJSPlugin       = require('uglifyjs-webpack-plugin');
 
 // Set constants
-const ENVIRONMENT = require('./constants_environment');
-const PATH        = require('./constants_path');
+const ENVIRONMENT = require('./environments');
+const PATH        = require('./paths');
 
 const sharedPlugins = [
 

@@ -1,8 +1,9 @@
 // Dependencies
-const PATH = require('./constants_path');
-const CONFIG_SETTINGS = require('./constants_settings');
-const LOADERS = require('./constants_loaders');
-const PLUGINS = require('./constants_plugins');
+const ALIASES  = require('./constants/aliases');
+const LOADERS  = require('./constants/loaders');
+const PATH     = require('./constants/paths');
+const PLUGINS  = require('./constants/plugins');
+const SETTINGS = require('./constants/settings');
 
 // Start config
 let generalConfig = {
@@ -10,7 +11,7 @@ let generalConfig = {
     app: PATH.INPUT_DIR + '/index.js'
   },
   output: {
-    filename: CONFIG_SETTINGS.webpack.outputPattern,
+    filename: SETTINGS.webpack.outputPattern,
     path: PATH.OUTPUT_DIR
   },
   plugins: PLUGINS,
@@ -18,15 +19,7 @@ let generalConfig = {
     rules: LOADERS
   },
   resolve: {
-    alias: {
-      DATA: PATH.DATA_DIR,
-      SCSS: PATH.SCSS_DIR,
-      CSS: PATH.CSS_DIR,
-      FONTS: PATH.FONTS_DIR,
-      IMG: PATH.IMG_DIR,
-      JSON: PATH.JSON_DIR,
-      ROOT: PATH.STATIC_DIR
-    },
+    alias: ALIASES,
     modules: [
       PATH.INPUT_DIR,
       'node_modules'
@@ -36,5 +29,5 @@ let generalConfig = {
 
 module.exports = Object.assign(
   generalConfig,
-  CONFIG_SETTINGS.webpack.exports
+  SETTINGS.webpack.exports
 );

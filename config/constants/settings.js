@@ -1,5 +1,6 @@
-const ENVIRONMENT = require('./constants_environment');
-const PATH = require('./constants_path');
+// Dependencies
+const ENVIRONMENT = require('./environments');
+const PATH = require('./paths');
 
 const CONFIG_SETTINGS = {
   'development': {

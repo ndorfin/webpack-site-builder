@@ -1,4 +1,5 @@
-const ENVIRONMENT = require('./constants_environment');
+// Dependencies
+const ENVIRONMENT = require('./environments');
 
 const LOADERS = [
   {
