@@ -33,6 +33,10 @@ module.exports = {
       'lodash'
     ]
   },
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: OUTPUT_DIR
+  },
   output: {
     filename: '[name].[chunkhash].js',
     path: OUTPUT_DIR
@@ -147,8 +151,8 @@ module.exports = {
         if (chunk.name) {
             return chunk.name;
         }
-        return chunk.modules
-          .map(m => PATH.relative(m.context, m.request))
+        return chunk
+          .mapModules(m => PATH.relative(m.context, m.request))
           .join('_');
       }
     ),

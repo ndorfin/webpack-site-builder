@@ -1,3 +1,25 @@
-$path_img_prefix: '../static/img';
-$path_font_prefix: '../static/fonts';
+$path_img_prefix: '../static/img' !default;
+$path_font_prefix: '../static/fonts' !default;
 $colour_background: rgba(255, 0, 0, 0.2);
+
+@function img-url($url:'') {
+  @return return-url($url, 'img');
+}
+
+@function font-url($url:'') {
+  @return return-url($url, 'font');
+}
+
+@function return-url($url: '', $type: '') {
+  $path_prefix: '';
+  @if ($url == '') {
+    @error "No URL specified for this #{$type}";
+  }
+  @if ($type == 'img') {
+    $path_prefix: $path_img_prefix;
+  }
+  @if ($type == 'font') {
+    $path_prefix: $path_font_prefix;
+  }
+  @return url(#{$path_prefix}/#{$url});
+}

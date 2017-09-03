@@ -1,7 +1,13 @@
 @import '__config';
 @import '_fonts';
 @import '../static/css/style.css';
-
+html {
+  height: 100%;
+}
 body {
-  background: $colour_background url('#{$path_img_prefix}/apple-touch-icon.png') 50% 50% no-repeat;
+  min-height: 100%;
+  background-color: rgba($colour_background,.05);
+  background-image: img-url('apple-touch-icon.png');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
 }
