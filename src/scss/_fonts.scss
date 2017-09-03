@@ -1,15 +1,15 @@
-$font_family_name:'OpenSans';
-$font_system_family_name:'Open Sans';
-$font_weighting_values: (400, 600);
-$font_weighting_names:  ('OpenSans-Regular', 'OpenSans-SemiBold');
+$font_family_name:        'OpenSans';
+$font_system_family_name: 'Open Sans';
+$font_weighting_values:   (400, 600);
+$font_weighting_names:    ('OpenSans-Regular', 'OpenSans-SemiBold');
 
 @each $weight, $name in zip($font_weighting_values,$font_weighting_names) {
   @font-face {
     font-family: $font_family_name;
     src: local($font_system_family_name),
          local('#{$name}'),
-         fnt-url('#{$font_family_name}-#{$weight}.woff2') format('woff2'),
-         fnt-url('#{$font_family_name}-#{$weight}.woff') format('woff');
+         fnt-url('fonts/#{$font_family_name}-#{$weight}.woff2') format('woff2'),
+         fnt-url('fonts/#{$font_family_name}-#{$weight}.woff') format('woff');
     font-weight: $weight;
     font-style: normal;
   }

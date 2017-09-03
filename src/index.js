@@ -1,4 +1,6 @@
 import 'SCSS/test.scss';
+import './fonts';
+
 import printMe from './print';
 import { square } from './math';
 

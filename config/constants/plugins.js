@@ -31,10 +31,6 @@ const sharedPlugins = [
     {
       from: PATH.STATIC_DIR + '/favicon.ico',
       to: PATH.OUTPUT_DIR
-    },
-    {
-      from: PATH.STATIC_DIR + '/index.html',
-      to: PATH.OUTPUT_DIR
     }
   ]),
 

@@ -29,23 +29,3 @@ $url-rewrites: (
   }
   @return url(#{$path_prefix}/#{$url});
 }
-
-// @each $type, $title in $url-rewrites {
-//   @function #{$type}-url($url:'') {
-//     @return return-url($url, $type);
-//   }
-// }
-
-// @function return-url($url: '', $type: '') {
-//   $path_prefix: '';
-//   @if ($url == '') {
-//     @error "No URL specified for this #{$type}";
-//   }
-//   @if ($type == 'img') {
-//     $path_prefix: $path_img_prefix;
-//   }
-//   @if ($type == 'font') {
-//     $path_prefix: $path_font_prefix;
-//   }
-//   @return url(#{$path_prefix}/#{$url});
-// }

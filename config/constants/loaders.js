@@ -4,10 +4,19 @@ const ENVIRONMENT       = require('./environments');
 
 const sharedLoaders = [
   {
-    test: /\.(png|svg|jpg|jpeg|gif|txt|ico|woff|woff2)$/,
+    test: /\.(png|svg|jpg|jpeg|gif|txt|ico)$/,
     use: [
       'file-loader'
     ]
+  },
+  {
+    test: /\.(woff|woff2)$/,
+    use: {
+      loader: 'file-loader',
+      options: {
+        name: 'fonts/[name]-[hash].[ext]'
+      }
+    }
   },
   {
     test: /\.(csv|tsv)$/,

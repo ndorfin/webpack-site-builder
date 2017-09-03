@@ -10,7 +10,7 @@ const CONFIG_SETTINGS = {
         devServer: {
           contentBase: PATH.OUTPUT_DIR,
           hot: true
-        },
+        }
       },
       outputPattern: '[name].[hash].js'
     }
