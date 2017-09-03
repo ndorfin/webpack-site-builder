@@ -26,7 +26,11 @@ let generalConfig = {
       IMG: PATH.IMG_DIR,
       JSON: PATH.JSON_DIR,
       ROOT: PATH.STATIC_DIR
-    }
+    },
+    modules: [
+      PATH.INPUT_DIR,
+      'node_modules'
+    ]
   }
 };
 
